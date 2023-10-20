@@ -1,4 +1,4 @@
-#!/bin/env/python3
+#!/usr/bin/python3
 """
 This script displays "Hello HBNB"
 	    	     "HBNB"
