@@ -1,53 +1,54 @@
-from flask import Flask
-from flask import render_template
+#!/usr/bin/python3
+""" Script that starts a Flask web application """
+from flask import Flask, render_template
 
 app = Flask(__name__)
+app.url_map.strict_slashes = False
 
 
-@app.route("/", strict_slashes=False)
+@app.route('/')
 def hello_hbnb():
-    """ This function will display 'Hello HBNB!'."""
-    return "Hello HBNB!"
+    """ Print hello hbnb """
+    return 'Hello HBNB!'
 
 
-@app.route("/hbnb", strict_slashes=False)
+@app.route('/hbnb')
 def hbnb():
-    """This method will display 'HBNB'."""
-    return "HBNB"
+    """ Print hbnb """
+    return 'HBNB'
 
 
-@app.route("/c/<text>", strict_slashes=False)
-def c(text):
-    """This will displays 'C' then  the value of <text>."""
-    text = text.replace("_", " ")
-    return "C {}".format(text)
+@app.route('/c/<text>')
+def c_is_fun(text):
+    """ this will display a char C followed by the value of the text variable """
+    return 'C {}'.format(text.replace('_', ' '))
 
 
-@app.route("/python", strict_slashes=False)
-@app.route("/python/<text>", strict_slashes=False)
-def python(text="is cool"):
+@app.route('/python')
+@app.route('/python/<text>')
+def python_is_cool(text='is cool'):
+    """ this will print python is cool """
+    return 'Python {}'.format(text.replace('_', ' '))
 
-    """This will display 'Python' then the value of <text>.
 
-    """
-    text = text.replace("_", " ")
-    return "Python {}".format(text)
+@app.route('/number/<int:n>')
+def number(n):
+    """ this will display the number route """
+    return '{} is number'.format(n)
 
-@app.route("/number/<int:n>", strict_slashes=False)
-def displayNumber(n):
-    """ this will display an integer """
-    return "{} is a number".format(n)
 
-@app.route("/number_template/<int:n>")
-def renderTemplate(n):
-    """ renders a template if n is an int """
-    return render_template("5-number.html", n=n)
+@app.route('/number_template/<int:n>')
+def number_template(n):
+    """ This method will render an HTML page if n is an integer """
+    return render_template('5-number.html', number=n)
 
-@app.route("/number_odd_or_even/<int:n>", strict_slashes=False)
+
+@app.route('/number_odd_or_even/<int:n>')
 def number_odd_or_even(n):
-    """ returns a template and states wheather its odd or even """
-    return render_template("6-number_odd_or_even.html", n=n)
+    """ this method will show the number as even or odd """
+    return render_template('6-number_odd_or_even.html', n=n)
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0")
 
+if __name__ == '__main__':
+    app.run(debug=True)
+    # app.run(host='0.0.0.0', port=5000)
