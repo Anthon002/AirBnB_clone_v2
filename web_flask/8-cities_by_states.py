@@ -3,7 +3,7 @@
 This script will display a list of states
 """
 from flask import Flask
-from flask import, render_template
+from flask import render_template
 from models import storage
 from models.state import State
 
