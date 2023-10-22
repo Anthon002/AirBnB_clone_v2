@@ -1,8 +1,3 @@
-#!/usr/bin/python3
-"""This script will start a Flask web application.
-
-listening on 0.0.0.0, port 5000.
-"""
 from flask import Flask
 from flask import render_template
 
@@ -47,6 +42,11 @@ def displayNumber(n):
 def renderTemplate(n):
     """ renders a template if n is an int """
     return render_template("5-number.html", n=n)
+
+@app.route("/number_odd_or_even/<int:n>", strict_slashes=False)
+def number_odd_or_even(n):
+    """ returns a template and states wheather its odd or even """
+    return render_template("6-number_odd_or_even.html", n=n)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
